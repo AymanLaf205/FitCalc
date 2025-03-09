@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Brain, Sparkles, Salad, Activity } from "lucide-react"
 import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/utils/translations"
+import type { UserData } from "../types/health"
 
 export default function Home() {
   const { nutritionPlan, calculatePlan } = useHealthAI()
@@ -15,7 +16,7 @@ export default function Home() {
   const { language } = useLanguage()
   const t = translations[language]
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = (data: UserData) => {
     calculatePlan(data)
     setShowResults(true)
     // Scroll to top when showing results
