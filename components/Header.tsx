@@ -12,7 +12,6 @@ export function Header() {
   const { theme, setTheme } = useTheme()
   const { language, setLanguage } = useLanguage()
   const [mounted, setMounted] = useState(false)
-  const t = translations[language]
 
   useEffect(() => {
     setMounted(true)

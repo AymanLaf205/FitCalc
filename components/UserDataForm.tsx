@@ -7,9 +7,7 @@ import type { UserData } from "../types/health"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent } from "@/components/ui/card"
 import { Activity, User, Weight, Ruler, Heart } from "lucide-react"
 import { useLanguage } from "./LanguageProvider"
 import { translations } from "@/utils/translations"
@@ -56,10 +54,6 @@ export function UserDataForm({ onSubmit }: UserDataFormProps) {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }))
     }
-  }
-
-  const handleRadioChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
