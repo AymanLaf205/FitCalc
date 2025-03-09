@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
 import { useLanguage } from "./LanguageProvider"
-import { translations } from "@/utils/translations"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function Header() {
