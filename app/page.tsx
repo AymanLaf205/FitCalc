@@ -10,7 +10,7 @@ import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/utils/translations"
 
 export default function Home() {
-  const { userData, nutritionPlan, calculatePlan } = useHealthAI()
+  const { nutritionPlan, calculatePlan } = useHealthAI()
   const [showResults, setShowResults] = useState(false)
   const { language } = useLanguage()
   const t = translations[language]
