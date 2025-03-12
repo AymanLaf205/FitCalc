@@ -16,7 +16,7 @@ export function calculateTDEE(userData: UserData): number {
     light: 1.375,
     moderate: 1.55,
     active: 1.725,
-    "very active": 1.9,
+    veryActive: 1.9,
   }
   return bmr * activityMultipliers[userData.activityLevel]
 }
