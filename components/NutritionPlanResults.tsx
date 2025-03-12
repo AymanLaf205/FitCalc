@@ -21,54 +21,54 @@ export function NutritionPlanResults({ plan }: NutritionPlanResultsProps) {
 
   return (
     <div className="results-container animate-fade-in" dir={language === "ar" ? "rtl" : "ltr"}>
-      <div className="grid gap-6">
+      <div className="grid gap-4 sm:gap-6">
         <div className="space-y-1">
-          <h2 className="text-3xl font-bold gradient-heading">{t.title}</h2>
-          <p className="text-muted-foreground">{t.subtitle}</p>
+          <h2 className="text-2xl sm:text-3xl font-bold gradient-heading">{t.title}</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">{t.subtitle}</p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <Card className="card-hover">
             <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Utensils className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Utensils className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 {t.calories}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-end gap-2">
-                <span className="text-4xl font-bold">{plan.calories}</span>
-                <span className="text-muted-foreground mb-1">{language === "ar" ? "سعرة حرارية" : "calories"}</span>
+                <span className="text-3xl sm:text-4xl font-bold">{plan.calories}</span>
+                <span className="text-sm sm:text-base text-muted-foreground mb-1">{language === "ar" ? "سعرة حرارية" : "calories"}</span>
               </div>
             </CardContent>
           </Card>
 
           <Card className="card-hover">
             <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Droplets className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Droplets className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 {t.hydration}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-end gap-2">
-                <span className="text-4xl font-bold">{Math.round((plan.hydration / 1000) * 10) / 10}</span>
-                <span className="text-muted-foreground mb-1">{language === "ar" ? "لتر" : "liters"}</span>
+                <span className="text-3xl sm:text-4xl font-bold">{Math.round((plan.hydration / 1000) * 10) / 10}</span>
+                <span className="text-sm sm:text-base text-muted-foreground mb-1">{language === "ar" ? "لتر" : "liters"}</span>
               </div>
             </CardContent>
           </Card>
 
           <Card className="card-hover">
             <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Moon className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Moon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 {t.sleep}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-end gap-2">
-                <span className="text-4xl font-bold">{plan.sleepDuration}</span>
-                <span className="text-muted-foreground mb-1">{language === "ar" ? "ساعات" : "hours"}</span>
+                <span className="text-3xl sm:text-4xl font-bold">{plan.sleepDuration}</span>
+                <span className="text-sm sm:text-base text-muted-foreground mb-1">{language === "ar" ? "ساعات" : "hours"}</span>
               </div>
             </CardContent>
           </Card>
@@ -76,13 +76,13 @@ export function NutritionPlanResults({ plan }: NutritionPlanResultsProps) {
 
         <Card className="card-hover">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Salad className="h-5 w-5 text-primary" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Salad className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               {t.macronutrients}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6">
+            <div className="grid gap-4 sm:gap-6">
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <div className="flex items-center gap-2">
@@ -127,66 +127,66 @@ export function NutritionPlanResults({ plan }: NutritionPlanResultsProps) {
 
         <Card className="card-hover">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Apple className="h-5 w-5 text-primary" />
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Apple className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               {t.micronutrients}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.vitamins.vitaminA}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.vitaminA} <span className="text-sm font-normal">{t.units.mcg}</span>
+            <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4">
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.vitamins.vitaminA}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.vitaminA} <span className="text-xs sm:text-sm font-normal">{t.units.mcg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.vitamins.vitaminC}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.vitaminC} <span className="text-sm font-normal">{t.units.mg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.vitamins.vitaminC}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.vitaminC} <span className="text-xs sm:text-sm font-normal">{t.units.mg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.vitamins.vitaminB12}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.vitaminB12} <span className="text-sm font-normal">{t.units.mcg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.vitamins.vitaminB12}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.vitaminB12} <span className="text-xs sm:text-sm font-normal">{t.units.mcg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.minerals.iron}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.iron} <span className="text-sm font-normal">{t.units.mg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.minerals.iron}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.iron} <span className="text-xs sm:text-sm font-normal">{t.units.mg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.minerals.calcium}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.calcium} <span className="text-sm font-normal">{t.units.mg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.minerals.calcium}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.calcium} <span className="text-xs sm:text-sm font-normal">{t.units.mg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.minerals.magnesium}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.magnesium} <span className="text-sm font-normal">{t.units.mg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.minerals.magnesium}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.magnesium} <span className="text-xs sm:text-sm font-normal">{t.units.mg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.minerals.potassium}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.potassium} <span className="text-sm font-normal">{t.units.mg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.minerals.potassium}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.potassium} <span className="text-xs sm:text-sm font-normal">{t.units.mg}</span>
                 </div>
               </div>
 
-              <div className="stat-card">
-                <div className="text-sm text-muted-foreground">{t.minerals.sodium}</div>
-                <div className="text-xl font-bold mt-1">
-                  {plan.micronutrients.sodium} <span className="text-sm font-normal">{t.units.mg}</span>
+              <div className="stat-card p-2 sm:p-3">
+                <div className="text-xs sm:text-sm text-muted-foreground">{t.minerals.sodium}</div>
+                <div className="text-lg sm:text-xl font-bold mt-1">
+                  {plan.micronutrients.sodium} <span className="text-xs sm:text-sm font-normal">{t.units.mg}</span>
                 </div>
               </div>
             </div>

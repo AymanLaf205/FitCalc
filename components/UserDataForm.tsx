@@ -11,230 +11,228 @@ import { Label } from "@/components/ui/label"
 import { Activity, User, Weight, Ruler, Heart } from "lucide-react"
 import { useLanguage } from "./LanguageProvider"
 import { translations } from "@/utils/translations"
+import { Card, CardContent } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 
 interface UserDataFormProps {
   onSubmit: (data: UserData) => void
 }
 
 export function UserDataForm({ onSubmit }: UserDataFormProps) {
-  const [formData, setFormData] = useState<UserData>({
-    name: "",
-    age: 0,
-    gender: "male",
-    weight: 0,
-    height: 0,
-    activityLevel: "sedentary",
-    healthConditions: [],
-    weightGoal: "maintain",
-  })
-
   const { language } = useLanguage()
   const t = translations[language].form
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: Number.parseFloat(value) || 0 }))
-  }
-
-  const handleSelectChange = (name: string, value: string) => {
-     if (name === "healthConditions") {
-      if (value === "none") {
-        setFormData((prev) => ({ ...prev, healthConditions: [] }))
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          healthConditions: [value]
-        }))
-      }
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }))
-    }
-  }
+  const [formData, setFormData] = useState<UserData>({
+    name: '',
+    age: 0,
+    gender: 'male',
+    weight: 0,
+    height: 0,
+    bodyType: 'mesomorph',
+    weightGoal: 'maintainWeight',
+    weightChangeAmount: 0,
+    activityLevel: 'moderate',
+    healthConditions: []
+  })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSubmit(formData)
   }
 
+  const handleInputChange = <K extends keyof UserData>(field: K, value: UserData[K]) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
   return (
-    <div className="form-container animate-fade-in" dir={language === "ar" ? "rtl" : "ltr"}>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2 text-center mb-8">
-          <h2 className="text-3xl font-bold">{t.title}</h2>
-          <p className="text-muted-foreground">{t.subtitle}</p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor="name" className="flex items-center gap-2">
-              <User className="h-4 w-4 text-primary" />
-              {t.name}
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-              placeholder={t.name}
-              required
-            />
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+      <Card>
+        <CardContent className="pt-6">
+          <div className="space-y-2 text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold">{t.title}</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">{t.subtitle}</p>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="age" className="flex items-center gap-2">
-              <User className="h-4 w-4 text-primary" />
-              {t.age}
-            </Label>
-            <Input
-              id="age"
-              name="age"
-              type="number"
-              value={formData.age || ""}
-              onChange={handleNumberChange}
-              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-              placeholder={t.age}
-              required
-            />
-          </div>
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="name">{t.name}</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={e => handleInputChange('name', e.target.value)}
+                placeholder={t.name}
+                className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                required
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="gender" className="flex items-center gap-2">
-              <User className="h-4 w-4 text-primary" />
-              {t.gender}
-            </Label>
-            <Select
-              name="gender"
-              value={formData.gender}
-              onValueChange={(value) => handleSelectChange("gender", value)}
-            >
-              <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
-                <SelectValue placeholder={t.gender} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="male">{t.male}</SelectItem>
-                <SelectItem value="female">{t.female}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="age">{t.age}</Label>
+              <Input
+                id="age"
+                type="number"
+                min="0"
+                value={formData.age || ''}
+                onChange={e => handleInputChange('age', Number(e.target.value))}
+                placeholder={t.age}
+                className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                required
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="weight" className="flex items-center gap-2">
-              <Weight className="h-4 w-4 text-primary" />
-              {t.weight}
-            </Label>
-            <Input
-              id="weight"
-              name="weight"
-              type="number"
-              value={formData.weight || ""}
-              onChange={handleNumberChange}
-              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-              placeholder={t.weight}
-              required
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="gender">{t.gender}</Label>
+              <Select
+                value={formData.gender}
+                onValueChange={value => handleInputChange('gender', value as UserData['gender'])}
+              >
+                <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder={t.gender} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="male">{t.male}</SelectItem>
+                  <SelectItem value="female">{t.female}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="height" className="flex items-center gap-2">
-              <Ruler className="h-4 w-4 text-primary" />
-              {t.height}
-            </Label>
-            <Input
-              id="height"
-              name="height"
-              type="number"
-              value={formData.height || ""}
-              onChange={handleNumberChange}
-              className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-              placeholder={t.height}
-              required
-            />
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="weight">{t.weight}</Label>
+              <Input
+                id="weight"
+                type="number"
+                min="0"
+                step="0.1"
+                value={formData.weight || ''}
+                onChange={e => handleInputChange('weight', Number(e.target.value))}
+                placeholder={t.weight}
+                className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                required
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="weightGoal" className="flex items-center gap-2">
-              <Activity className="h-4 w-4 text-primary" />
-              {t.weightGoal}
-            </Label>
-            <Select
-              name="weightGoal"
-              value={formData.weightGoal}
-              onValueChange={(value) => handleSelectChange("weightGoal", value)}
-            >
-              <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
-                <SelectValue placeholder={t.weightGoal} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="gain">{t.gainWeight}</SelectItem>
-                <SelectItem value="lose">{t.loseWeight}</SelectItem>
-                <SelectItem value="maintain">{t.maintainWeight}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="height">{t.height}</Label>
+              <Input
+                id="height"
+                type="number"
+                min="0"
+                value={formData.height || ''}
+                onChange={e => handleInputChange('height', Number(e.target.value))}
+                placeholder={t.height}
+                className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                required
+              />
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="activityLevel" className="flex items-center gap-2">
-              <Activity className="h-4 w-4 text-primary" />
-              {t.activityLevel}
-            </Label>
-            <Select
-              name="activityLevel"
-              value={formData.activityLevel}
-              onValueChange={(value) => handleSelectChange("activityLevel", value)}
-            >
-              <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
-                <SelectValue placeholder={t.activityLevel} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="sedentary">{t.activityLevels.sedentary}</SelectItem>
-                <SelectItem value="light">{t.activityLevels.light}</SelectItem>
-                <SelectItem value="moderate">{t.activityLevels.moderate}</SelectItem>
-                <SelectItem value="active">{t.activityLevels.active}</SelectItem>
-                <SelectItem value="very active">{t.activityLevels.veryActive}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+            <div className="space-y-2">
+              <Label htmlFor="bodyType">{t.bodyType}</Label>
+              <Select
+                value={formData.bodyType}
+                onValueChange={value => handleInputChange('bodyType', value as UserData['bodyType'])}
+              >
+                <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder={t.bodyType} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ectomorph">{t.bodyTypes.ectomorph}</SelectItem>
+                  <SelectItem value="mesomorph">{t.bodyTypes.mesomorph}</SelectItem>
+                  <SelectItem value="endomorph">{t.bodyTypes.endomorph}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="healthConditions" className="flex items-center gap-2">
-              <Heart className="h-4 w-4 text-primary" />
-              {t.healthConditions}
-            </Label>
-            <Select
-              name="healthConditions"
-              value={formData.healthConditions[0] || "none"}
-              onValueChange={(value) => handleSelectChange("healthConditions", value)}
-            >
-              <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
-                <SelectValue placeholder={t.healthConditions} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">{t.conditions.none}</SelectItem>
-                <SelectItem value="diabetes">{t.conditions.diabetes}</SelectItem>
-                <SelectItem value="hypertension">{t.conditions.hypertension}</SelectItem>
-                <SelectItem value="cholesterol">{t.conditions.cholesterol}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+            <div className="space-y-2">
+              <Label htmlFor="weightGoal">{t.weightGoal}</Label>
+              <Select
+                value={formData.weightGoal}
+                onValueChange={value => {
+                  handleInputChange('weightGoal', value as UserData['weightGoal'])
+                  if (value === 'maintainWeight') {
+                    handleInputChange('weightChangeAmount', 0)
+                  }
+                }}
+              >
+                <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder={t.weightGoal} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gainWeight">{t.gainWeight}</SelectItem>
+                  <SelectItem value="loseWeight">{t.loseWeight}</SelectItem>
+                  <SelectItem value="maintainWeight">{t.maintainWeight}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-        <div className="flex justify-center mt-8">
-          <Button
-            type="submit"
-            className="w-full md:w-auto bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transition-all duration-300 px-8"
-            size="lg"
-          >
-            {t.submit}
-          </Button>
-        </div>
-      </form>
-    </div>
+            <div className="space-y-2">
+              <Label htmlFor="weightChangeAmount">{t.weightChangeAmount}</Label>
+              <Input
+                id="weightChangeAmount"
+                type="number"
+                min="0"
+                max="20"
+                step="0.5"
+                value={formData.weightChangeAmount || ''}
+                onChange={e => handleInputChange('weightChangeAmount', Number(e.target.value))}
+                placeholder={`${formData.weightGoal === 'gainWeight' ? 'Gain' : 'Lose'} kg`}
+                className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                disabled={formData.weightGoal === 'maintainWeight'}
+                required={formData.weightGoal !== 'maintainWeight'}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="activityLevel">{t.activityLevel}</Label>
+              <Select
+                value={formData.activityLevel}
+                onValueChange={value => handleInputChange('activityLevel', value as UserData['activityLevel'])}
+              >
+                <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder={t.activityLevel} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="sedentary">{t.activityLevels.sedentary}</SelectItem>
+                  <SelectItem value="light">{t.activityLevels.light}</SelectItem>
+                  <SelectItem value="moderate">{t.activityLevels.moderate}</SelectItem>
+                  <SelectItem value="active">{t.activityLevels.active}</SelectItem>
+                  <SelectItem value="veryActive">{t.activityLevels.veryActive}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="healthConditions">{t.healthConditions}</Label>
+              <Select
+                value={formData.healthConditions[0] || 'none'}
+                onValueChange={value => {
+                  const newConditions = value === 'none' ? [] : [value]
+                  handleInputChange('healthConditions', newConditions)
+                }}
+              >
+                <SelectTrigger className="transition-all duration-200 focus:ring-2 focus:ring-primary/20">
+                  <SelectValue placeholder={t.healthConditions} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">{t.conditions.none}</SelectItem>
+                  <SelectItem value="diabetes">{t.conditions.diabetes}</SelectItem>
+                  <SelectItem value="hypertension">{t.conditions.hypertension}</SelectItem>
+                  <SelectItem value="cholesterol">{t.conditions.cholesterol}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="flex justify-center px-4 sm:px-0">
+        <Button
+          type="submit"
+          className="w-full sm:w-auto bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transition-all duration-300 px-6 sm:px-8"
+          size="lg"
+        >
+          {t.submit}
+        </Button>
+      </div>
+    </form>
   )
 }
 

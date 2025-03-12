@@ -48,6 +48,14 @@ export const translations = {
         none: "None",
       },
       submit: "Calculate My Plan",
+      bodyType: "Body Type",
+      bodyTypes: {
+        ectomorph: "Ectomorph (Slim & Tall)",
+        mesomorph: "Mesomorph (Athletic & Muscular)",
+        endomorph: "Endomorph (Broader & Curvier)"
+      },
+      weightChangeAmount: "Target Weight Change",
+      weightChangeLabel: "How many kg do you want to",
     },
     results: {
       title: "Your Personalized Health Plan",
@@ -132,6 +140,14 @@ export const translations = {
         none: "لا شيء",
       },
       submit: "احسب خطتي",
+      bodyType: "نوع الجسم",
+      bodyTypes: {
+        ectomorph: "نحيف وطويل",
+        mesomorph: "رياضي وعضلي",
+        endomorph: "عريض ومنحني"
+      },
+      weightChangeAmount: "مقدار تغيير الوزن المستهدف",
+      weightChangeLabel: "كم كيلوغرام تريد أن",
     },
     results: {
       title: "خطتك الصحية الشخصية",
