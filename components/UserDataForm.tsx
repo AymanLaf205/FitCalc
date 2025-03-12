@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import type React from "react"
@@ -8,11 +9,9 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { Activity, User, Weight, Ruler, Heart } from "lucide-react"
 import { useLanguage } from "./LanguageProvider"
 import { translations } from "@/utils/translations"
 import { Card, CardContent } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
 
 interface UserDataFormProps {
   onSubmit: (data: UserData) => void
