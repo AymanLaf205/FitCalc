@@ -1,39 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏋️‍♂️ FitCalc – Fitness Calculator
 
-## Getting Started
+**FitCalc** is a lightweight and accurate fitness calculator that helps you determine your daily calorie and protein needs based on your personal data. Whether you're aiming to lose fat, build muscle, or maintain your physique, FitCalc provides reliable nutritional estimates tailored to your goals.
 
-First, run the development server:
+## ✨ Features
+
+- **Calorie Needs Calculator** – Calculates your Total Daily Energy Expenditure (TDEE)
+- **Protein Intake Estimator** – Suggests optimal protein intake for your body and goals
+- **Goal-Based Adjustments** – Supports cutting, bulking, or maintaining
+- **Clean UI** – Simple, responsive interface optimized for both mobile and desktop
+- **Instant Results** – No signup, no clutter — just results
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js `v16.8.0` or higher
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/your-username/fitcalc.git
+   cd fitcalc
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧠 Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/app` – Application layout and routing
+- `/components` – UI components like forms and result cards
+- `/lib` – Calculation logic and utility functions
+- `/styles` – Global and component styles (if applicable)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Technologies Used
 
-## Learn More
+- **Next.js 13.5**
+- **React 18**
+- **Tailwind CSS** – Utility-first styling
+- **shadcn/ui** – Prebuilt components
+- **local state** – Used for quick, responsive calculations
 
-To learn more about Next.js, take a look at the following resources:
+## ☁️ Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ready for deployment on **[Vercel](https://vercel.com/)**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-# FitCalc
+1. Push your code to GitHub
+2. Import the repository into Vercel
+3. Deploy instantly — no environment variables needed
